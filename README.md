@@ -1,0 +1,1 @@
+# Gestor_de_tasques_interactiu_per_components
