@@ -1,6 +1,7 @@
 <script setup>
 // @ts-nocheck
 import { defineProps, defineEmits } from "vue";
+
 const props = defineProps({
   tasca: { type: Object, required: true },
   index: { type: Number, required: true }
@@ -30,14 +31,8 @@ function eliminarTasca() {
 </template>
 
 <style scoped>
-.done {
-  text-decoration: line-through;
-  color: #d291bc;
-}
-.botons {
-  display: flex;
-  gap: 5px;
-}
+.done { text-decoration: line-through; color: #d291bc; }
+.botons { display: flex; gap: 5px; }
 button {
   background-color: #ffb6c1;
   border: none;
