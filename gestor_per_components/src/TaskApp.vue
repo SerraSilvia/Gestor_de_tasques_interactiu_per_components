@@ -2,93 +2,19 @@
 // @ts-nocheck
 import HeaderComponent from "./components/HeaderComponent.vue";
 import { ref, computed } from "vue";
-
-//ref es fa servir per strings i per crear arrays o objectes reactius
-// Computed es fa servir per propietats derivades d'altres propietats reactives
-const newTask = ref("");
-const llista = ref([]);
-const mostrarPendents = ref(false);
-const Totals = computed(() => llista.value.length);
-const Pendents = computed(
-  () => llista.value.filter((tasca) => !tasca.Realitzada).length
-);
-
-function afegirTasca() {
-  if (newTask.value.trim() !== "") {
-    llista.value.push({ titol: newTask.value, Realitzada: false });
-    newTask.value = ""; //neteja l'input
-  }
-}
-
-function eliminarTasca(index) {
-  llista.value.splice(index, 1);
-}
-
-const toggleRealitzada = (tasca) => {
-  tasca.Realitzada = !tasca.Realitzada;
-};
-
-/* Computed: llista filtrada - > es fa servir el computed perque si fem servir una funcio normal aniria executant cada
-cop que vue renderitza i així, el computed memoritza el resultat fins que canvia alguna de les seves dependències */
-const llistaFiltrada = computed(() => {
-  return mostrarPendents.value
-    ? llista.value.filter((tasca) => !tasca.Realitzada)
-    : llista.value;
-});
+import TaskForm from "./components/TaskForm.vue";
+import TaskList from "./components/TaskList.vue";
+import TaskItem from "./components/TaskItem.vue";
 </script>
 
 <template>
   <HeaderComponent />
-
   <main>
     <h2>Gestiona les teves tasques:</h2>
 
-    <form @submit.prevent="afegirTasca">
-      <input
-        v-model="newTask"
-        type="text"
-        @keyup.enter="afegirTasca"
-        placeholder="Escriu una nova tasca"
-      />
-      <button type="submit">Afegir Tasca</button>
-    </form>
-
-    <h3>Llista de Tasques:</h3>
-    <div class="mostra_pendents">
-      <input type="checkbox" v-model="mostrarPendents" id="pendents" />
-      <label for="pendents">Mostra només pendents</label>
-      <p class="pendents" v-if="mostrarPendents">Tasques pendents:</p>
-      <p class="missatge" v-if="Pendents === 0">(No hi ha tasques pendents)</p>
-
-    </div>
-
-    <p class="missatge" v-if="llista.length === 0">
-      (introdueix tasques perque es mostrin aquí)
-    </p>
-    <ul>
-      <li v-for="(tasca, index) in llistaFiltrada" :key="index">
-        {{ tasca.titol }}
-
-        <!-- Contenidor botons -->
-
-        <div class="botons">
-          <button @click="toggleRealitzada(tasca)">
-            {{ tasca.Realitzada ? "Realitzada" : "Pendent" }}
-          </button>
-          <button @click="eliminarTasca(index)">Esborrar</button>
-        </div>
-      </li>
-    </ul>
-
-    <div class="totals">
-     <h4> Totals: {{ Totals }} | Pendents: {{ Pendents }} </h4>
-
-
-  <p class="missatge" style="color: green;" v-if="llista.length > 0 && Pendents === 0">
-    Has acabat totes les tasques
-  </p>
-
-    </div>
+    <TaskForm/>
+    <TaskList/>
+    <TaskItem/>
 
   </main>
 </template>
