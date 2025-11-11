@@ -1,5 +1,5 @@
 # Gestor_de_tasques_interactiu
-![Imatge gestor](gestor_de_tasques/src/assets/Captura.JPG)
+![Imatge gestor](gestor_per_components/src/assets/Captura.JPG)
 
 Aquest projecte és un **Gestor de Tasques** creat amb **Vue 3**, estructurat en **components modulars** per millorar la mantenibilitat i llegibilitat del codi.
 
@@ -53,7 +53,7 @@ npm create vue@latest
 npm install
 npm run dev           # Mode desenvolupament
 npm run build         # Construir per producció
-
+```
 
 ###
 Autora: Silvia Serra
